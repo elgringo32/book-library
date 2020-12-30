@@ -13,9 +13,15 @@
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        <div id="modal">
+            <form class="search-form">
+                <div><input type="text" id="book-name" placeholder="Book Name"></div>
+               <div><input type="text" id="book-author" placeholder="Book Author"></div>
+                <div><input type="text" id="book-page-count" placeholder="Number of Pages"></div>
+                <div>Have you read this book?</div>
+                <div><input type="checkbox" id="book-read-by-user"></div>
+              </form>
+            </div>
         
         <script src="/scripts.js" async defer></script>
     </body>
