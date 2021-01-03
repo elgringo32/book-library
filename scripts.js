@@ -44,6 +44,7 @@ function buildCard(item) {
     var divBooks = document.querySelector('#all-cards');
     
     var divCard = document.createElement('div')
+    divCard.setAttribute('data-index', myLibrary.indexOf(item));
     divCard.classList.add('card');
     divCard.style.cssText = "width: 18rem;"
     divBooks.appendChild(divCard);
