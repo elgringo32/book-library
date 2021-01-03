@@ -44,7 +44,6 @@ function buildCard(item) {
     var divBooks = document.querySelector('#all-cards');
     
     var divCard = document.createElement('div')
-    divCard.setAttribute('data-index', myLibrary.indexOf(item));
     divCard.classList.add('card');
     divCard.style.cssText = "width: 18rem;"
     divBooks.appendChild(divCard);
@@ -58,15 +57,15 @@ function buildCard(item) {
     divCardTitle.innerHTML = item.title;
     divCardBody.appendChild(divCardTitle);
 
-    var divCardSubTitle = document.createElement('h6');
-    divCardSubTitle.classList.add('card-subtitle','mb-2','text-muted');
-    divCardSubTitle.innerHTML = item.author;
-    divCardBody.appendChild(divCardSubTitle);
+    var divCardAuthor = document.createElement('h6');
+    divCardAuthor.classList.add('card-subtitle','mb-2','text-muted');
+    divCardAuthor.innerHTML = item.author;
+    divCardBody.appendChild(divCardAuthor);
     
-    var divCardText = document.createElement('div')
-    divCardText.classList.add('card-text');
-    divCardText.innerHTML = `Pages: ${item.pages}`;
-    divCardBody.appendChild(divCardText);
+    var divCardPages = document.createElement('div')
+    divCardPages.classList.add('card-text');
+    divCardPages.innerHTML = `Pages: ${item.pages}`;
+    divCardBody.appendChild(divCardPages);
 
     var divCardRead = document.createElement('div')
     divCardRead.classList.add('card-read');
@@ -78,20 +77,31 @@ function buildCard(item) {
     }
     divCardBody.appendChild(divCardRead);
     
-    var divCardDelete = document.createElement('a')
-    divCardDelete.classList.add('card-link');
-    divCardDelete.setAttribute('href','#')
-    divCardDelete.innerHTML = 'Remove';
-    divCardBody.appendChild(divCardDelete);
+    var divCardDeleteBtn = document.createElement('a')
+    divCardDeleteBtn.setAttribute('data-index', myLibrary.indexOf(item));
+    divCardDeleteBtn.classList.add('card-link');
+    divCardDeleteBtn.setAttribute('href','#')
+    divCardDeleteBtn.innerHTML = 'Remove';
+    divCardBody.appendChild(divCardDeleteBtn);
 
-    let deleteLinks = document.querySelectorAll('.card-link');
-    deleteLinks.forEach(item => item.addEventListener('click',removeBook));
+    divCardDeleteBtn.addEventListener('click', () => {
+      myLibrary.splice(myLibrary.indexOf(item),1);
+      rebuildLibrary();
+    })
 }
 
 
 function removeBook(el) {
   console.log(this.object);
   console.log(el);
+}
+
+function rebuildLibrary() {
+  const bookContainer = document.querySelector('#all-cards');
+  const books = document.querySelectorAll('.card');
+  books.forEach(book => bookContainer.removeChild(book));
+  
+  myLibrary.forEach(item => buildCard(item));
 }
 
 
