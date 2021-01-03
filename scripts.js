@@ -18,6 +18,23 @@ function addBookToLibrary() {
   // myLibrary.forEach(book => buildCard(book));
 }
 
+var readStatus = document.getElementsByClassName('form-check-input')[0];
+console.log(readStatus.checked);
+
+function updateReadStatus() {
+  console.log(this);  
+  console.log(readStatus.checked);
+  if (readStatus.checked) {
+    console.log('check');
+    document.getElementsByClassName('form-check-label')[0].innerHTML = "Yes"
+  }
+  else {
+    document.getElementsByClassName('form-check-label')[0].innerHTML = "No"
+  }
+}
+
+readStatus.addEventListener('click', updateReadStatus);
+
 document.getElementById('add-book-submit').addEventListener('click', addBookToLibrary);
 
 function buildCard(item) {
@@ -44,8 +61,15 @@ function buildCard(item) {
     
     var divCardText = document.createElement('div')
     divCardText.classList.add('card-text');
-    divCardText.innerHTML = "Pages: " + item['book-page-count'];
+    divCardText.innerHTML = `Pages: ${item['book-page-count']}`;
     divCardBody.appendChild(divCardText);
+
+    var divCardRead = document.createElement('div')
+    divCardRead.classList.add('card-read');
+    divCardRead.innerHTML = `Pages: ${item['book-page-count']}`;
+    divCardBody.appendChild(divCardRead);
+
+
     // var divCardDelete = document.createElement('a').classList.add('card-link');
 
 }
