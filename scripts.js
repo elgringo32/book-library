@@ -8,23 +8,26 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
-  var addBookSubmitInput = document.querySelectorAll('input');
+  var bookTitle = document.getElementById('book-title').value;
+  var bookAuthor = document.getElementById('book-author').value;
+  var bookPages = document.getElementById('book-pages').value;
+  var readStatus = document.getElementsByClassName('form-check-input')[0].checked;
+
+  var book = new Book(bookTitle, bookAuthor, bookPages, readStatus);
   
-  addBookSubmitInput = Array.from(addBookSubmitInput).reduce((acc,input) => ({...acc,[input.id]:input.value}),{});
-  myLibrary.push(addBookSubmitInput);
+  myLibrary.push(book);
   console.log(myLibrary);
 
-  buildCard(addBookSubmitInput);
+  buildCard(book);
   // myLibrary.forEach(book => buildCard(book));
 }
 
-var readStatus = document.getElementsByClassName('form-check-input')[0];
-console.log(readStatus.checked);
+var currentReadStatus = document.getElementsByClassName('form-check-input')[0];
 
 function updateReadStatus() {
   console.log(this);  
-  console.log(readStatus.checked);
-  if (readStatus.checked) {
+  console.log(currentReadStatus);
+  if (currentReadStatus) {
     console.log('check');
     document.getElementsByClassName('form-check-label')[0].innerHTML = "Yes"
   }
@@ -33,7 +36,7 @@ function updateReadStatus() {
   }
 }
 
-readStatus.addEventListener('click', updateReadStatus);
+currentReadStatus.addEventListener('click', updateReadStatus);
 
 document.getElementById('add-book-submit').addEventListener('click', addBookToLibrary);
 
@@ -51,22 +54,22 @@ function buildCard(item) {
 
     var divCardTitle = document.createElement('h5');
     divCardTitle.classList.add('card-title');
-    divCardTitle.innerHTML = item['book-name'];
+    divCardTitle.innerHTML = item.title;
     divCardBody.appendChild(divCardTitle);
 
     var divCardSubTitle = document.createElement('h6');
     divCardSubTitle.classList.add('card-subtitle','mb-2','text-muted');
-    divCardSubTitle.innerHTML = item['book-author'];
+    divCardSubTitle.innerHTML = item.author;
     divCardBody.appendChild(divCardSubTitle);
     
     var divCardText = document.createElement('div')
     divCardText.classList.add('card-text');
-    divCardText.innerHTML = `Pages: ${item['book-page-count']}`;
+    divCardText.innerHTML = `Pages: ${item.pages}`;
     divCardBody.appendChild(divCardText);
 
     var divCardRead = document.createElement('div')
     divCardRead.classList.add('card-read');
-    divCardRead.innerHTML = `Pages: ${item['book-page-count']}`;
+    divCardRead.innerHTML = item.read;
     divCardBody.appendChild(divCardRead);
 
 
