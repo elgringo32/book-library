@@ -69,12 +69,28 @@ function buildCard(item) {
 
     var divCardRead = document.createElement('div')
     divCardRead.classList.add('card-read');
-    divCardRead.innerHTML = item.read;
+    if (item.read) {
+      divCardRead.innerHTML = 'Read';
+    }
+    else {
+      divCardRead.innerHTML = 'Not Read';
+    }
     divCardBody.appendChild(divCardRead);
+    
+    var divCardDelete = document.createElement('a')
+    divCardDelete.classList.add('card-link');
+    divCardDelete.setAttribute('href','#')
+    divCardDelete.innerHTML = 'Remove';
+    divCardBody.appendChild(divCardDelete);
+
+    let deleteLinks = document.querySelectorAll('.card-link');
+    deleteLinks.forEach(item => item.addEventListener('click',removeBook));
+}
 
 
-    // var divCardDelete = document.createElement('a').classList.add('card-link');
-
+function removeBook(el) {
+  console.log(this.object);
+  console.log(el);
 }
 
 
