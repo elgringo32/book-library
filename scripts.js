@@ -25,6 +25,7 @@ function buildCard(item) {
     
     var divCard = document.createElement('div')
     divCard.classList.add('card');
+    divCard.style.cssText = "width: 18rem;"
     divBooks.appendChild(divCard);
     
     var divCardBody = document.createElement('div');
@@ -41,8 +42,10 @@ function buildCard(item) {
     divCardSubTitle.innerHTML = item['book-author'];
     divCardBody.appendChild(divCardSubTitle);
     
-
-    // var divCardText = document.createElement('div').classList.add('card-text');
+    var divCardText = document.createElement('div')
+    divCardText.classList.add('card-text');
+    divCardText.innerHTML = "Pages: " + item['book-page-count'];
+    divCardBody.appendChild(divCardText);
     // var divCardDelete = document.createElement('a').classList.add('card-link');
 
 }
