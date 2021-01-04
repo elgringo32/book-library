@@ -22,12 +22,14 @@ function addBookToLibrary() {
 }
 
 function updateReadStatus(item) {
+  console.log(item.read)
   if (item.toElement.checked) {
     item.toElement.nextElementSibling.innerHTML = "Yes"
   }
   else {
     item.toElement.nextElementSibling.innerHTML = "No"
   }
+    
 }
 
 function getCurrentStatus() {
@@ -114,7 +116,13 @@ function buildCard(item) {
       myLibrary.splice(myLibrary.indexOf(item),1);
       rebuildLibrary();
     })
+    var form = document.querySelector('form');
+    form.reset();
     getCurrentStatus().forEach(currentReadStatus => currentReadStatus.addEventListener('click', updateReadStatus));
+
+    getCurrentStatus().forEach(currentReadStatus => currentReadStatus.addEventListener('click', () => { 
+      item.read = !item.read; 
+      }));
 }
 
 
