@@ -22,14 +22,14 @@ function addBookToLibrary() {
   // myLibrary.forEach(book => buildCard(book));
 }
 
-var currentReadStatus = document.getElementsByClassName('form-check-input')[0];
+var currentReadStatus = document.getElementsByClassName('modal-toggle')[0];
 
 function updateReadStatus() {
   if (currentReadStatus) {
-    document.getElementsByClassName('form-check-label')[0].innerHTML = "Yes"
+    document.getElementsByClassName('modal-toggle')[0].innerText = "Yes"
   }
   else {
-    document.getElementsByClassName('form-check-label')[0].innerHTML = "No"
+    document.getElementsByClassName('modal-toggle')[0].innerText = "No"
   }
 }
 
@@ -70,7 +70,7 @@ function buildCard(item) {
     divCardRead.classList.add('form-check');
     divCardRead.classList.add('form-switch');
     
-    
+
     if (item.read) {
       var divCardReadInput = document.createElement('input');
       divCardReadInput.classList.add('form-check-input');
