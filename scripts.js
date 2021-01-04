@@ -19,21 +19,23 @@ function addBookToLibrary() {
   console.log(myLibrary);
 
   buildCard(book);
-  // myLibrary.forEach(book => buildCard(book));
 }
 
-var currentReadStatus = document.getElementsByClassName('modal-toggle')[0];
-
-function updateReadStatus() {
-  if (currentReadStatus) {
-    document.getElementsByClassName('modal-toggle')[0].innerText = "Yes"
+function updateReadStatus(item) {
+  if (item.toElement.checked) {
+    item.toElement.nextElementSibling.innerHTML = "Yes"
   }
   else {
-    document.getElementsByClassName('modal-toggle')[0].innerText = "No"
+    item.toElement.nextElementSibling.innerHTML = "No"
   }
 }
 
-currentReadStatus.addEventListener('click', updateReadStatus);
+function getCurrentStatus() {
+  var currentReadStatuses = document.querySelectorAll('.form-check-input');
+  return currentReadStatuses;
+}
+getCurrentStatus().forEach(currentReadStatus => currentReadStatus.addEventListener('click', updateReadStatus,));
+
 
 document.getElementById('add-book-submit').addEventListener('click', addBookToLibrary);
 
@@ -112,6 +114,7 @@ function buildCard(item) {
       myLibrary.splice(myLibrary.indexOf(item),1);
       rebuildLibrary();
     })
+    getCurrentStatus().forEach(currentReadStatus => currentReadStatus.addEventListener('click', updateReadStatus));
 }
 
 
