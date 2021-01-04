@@ -25,10 +25,7 @@ function addBookToLibrary() {
 var currentReadStatus = document.getElementsByClassName('form-check-input')[0];
 
 function updateReadStatus() {
-  console.log(this);  
-  console.log(currentReadStatus);
   if (currentReadStatus) {
-    console.log('check');
     document.getElementsByClassName('form-check-label')[0].innerHTML = "Yes"
   }
   else {
@@ -67,15 +64,42 @@ function buildCard(item) {
     divCardPages.innerHTML = `Pages: ${item.pages}`;
     divCardBody.appendChild(divCardPages);
 
-    var divCardRead = document.createElement('div')
-    divCardRead.classList.add('card-read');
+    var divCardReadForm = document.createElement('form');
+
+    var divCardRead = document.createElement('div');
+    divCardRead.classList.add('form-check');
+    divCardRead.classList.add('form-switch');
+    
+    
     if (item.read) {
-      divCardRead.innerHTML = 'Read';
+      var divCardReadInput = document.createElement('input');
+      divCardReadInput.classList.add('form-check-input');
+      divCardReadInput.setAttribute('type', 'checkbox');
+      divCardReadInput.setAttribute('id', 'flexSwitchCheckChecked');
+      divCardReadInput.checked = true;
+
+    var divCardReadLabel = document.createElement('label')
+    divCardReadLabel.classList.add('form-check-label');
+    divCardReadLabel.setAttribute('for', 'flexSwitchCheckChecked');
+    divCardReadLabel.innerHTML = 'Yes'
     }
     else {
-      divCardRead.innerHTML = 'Not Read';
+      var divCardReadInput = document.createElement('input');
+      divCardReadInput.classList.add('form-check-input');
+      divCardReadInput.setAttribute('type', 'checkbox');
+      divCardReadInput.setAttribute('id', 'flexSwitchCheckDefault');
+
+      var divCardReadLabel = document.createElement('label')
+      divCardReadLabel.classList.add('form-check-label');
+      divCardReadLabel.setAttribute('for', 'flexSwitchCheckDefault');
+      divCardReadLabel.innerHTML = 'No'
     }
-    divCardBody.appendChild(divCardRead);
+
+    divCardBody.appendChild(divCardReadForm);
+    divCardReadForm.appendChild(divCardRead);
+    divCardRead.appendChild(divCardReadInput);
+    divCardRead.appendChild(divCardReadLabel);
+    
     
     var divCardDeleteBtn = document.createElement('a')
     divCardDeleteBtn.setAttribute('data-index', myLibrary.indexOf(item));
