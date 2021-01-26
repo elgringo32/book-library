@@ -125,12 +125,6 @@ function buildCard(item) {
       }));
 }
 
-
-function removeBook(el) {
-  console.log(this.object);
-  console.log(el);
-}
-
 function rebuildLibrary() {
   const bookContainer = document.querySelector('#all-cards');
   const books = document.querySelectorAll('.card');
