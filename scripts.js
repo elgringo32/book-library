@@ -1,19 +1,20 @@
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book {
+    constructor (title, author, pages, read) {
+      this.title = title;
+      this.author = author;
+      this.pages = pages;
+      this.read = read;
 }
-
+}
 function addBookToLibrary() {
   var bookTitle = document.getElementById('book-title').value;
   var bookAuthor = document.getElementById('book-author').value;
   var bookPages = document.getElementById('book-pages').value;
   var readStatus = document.getElementsByClassName('form-check-input')[0].checked;
 
-  var book = new Book(bookTitle, bookAuthor, bookPages, readStatus);
+  let book = new Book(bookTitle, bookAuthor, bookPages, readStatus);
   
   myLibrary.push(book);
   console.log(myLibrary);
